@@ -11,7 +11,11 @@
         <h2>Latest Products.</h2>
       </div>
       <div class="products flex flex-wrap justify-between">
-        <div class="w-1/4 m-6" v-for="product in latestProducts" :key="product.id">
+        <div
+          class="w-1/4 m-6"
+          v-for="product in latestProducts"
+          :key="product.id"
+        >
           <div
             class="
               max-w-sm
@@ -40,39 +44,21 @@
               <p class="font-bold text-3xl my-1 text-gray-900">
                 price : ${{ product.price }}
               </p>
-              <a
-                href="#"
-                class="
-                  inline-flex
-                  items-center
-                  py-2
-                  px-3
-                  text-sm
-                  font-medium
-                  text-center text-white
-                  bg-blue-700
-                  rounded-lg
-                  hover:bg-blue-800
-                  focus:ring-4 focus:ring-blue-300
-                  dark:bg-blue-600
-                  dark:hover:bg-blue-700
-                  dark:focus:ring-blue-800
-                "
-              >
-                Read more
-                <svg
-                  class="ml-2 -mr-1 w-4 h-4"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+              <router-link :to="product.get_absolute_url">
+                <button
+                  class="
+                    bg-blue-400
+                    hover:bg-blue-500
+                    text-white
+                    font-bold
+                    py-2
+                    px-4
+                    mt-2
+                  "
                 >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </a>
+                  View details
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -94,6 +80,7 @@ export default defineComponent({
     };
   },
   components: {},
+  
   mounted() {
     this.getLatestProducts();
   },
