@@ -4,7 +4,6 @@
   >
     <div class="nav-brand mx-24">
       <router-link to="/"><strong>Djackets</strong></router-link>
-      <i class="bx bx-menu"></i>
     </div>
     <div class="nav-menu flex items-center justify-between mx-24" >
       <div class="nav-links">
