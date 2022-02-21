@@ -78,7 +78,9 @@ export default defineComponent({
   data() {
     return {
       quantity: 1,
-      product: {},
+      product: {
+        name : ""
+      },
     };
   },
 

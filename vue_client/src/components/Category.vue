@@ -1,19 +1,13 @@
 <template>
   <div class="home">
-    <section class="welcome">
-      <div class="hello text-center text-white bg-gray-900 py-24">
-        <p class="text-4xl my-2">Welcome to Djackets</p>
-        <p>Best online jackets store.</p>
-      </div>
-    </section>
     <div class="content p-12">
       <div class="title text-center font-bold text-3xl">
-        <h2>Latest Products.</h2>
+        <h2 class="text-4xl my-2">{{category.name}} Djackets</h2>
       </div>
-      <div class="products flex flex-wrap">
+      <div class="products flex flex-wrap my-6 mx-12">
         <div
-          class="w-1/4 my-6 mx-12"
-          v-for="product in latestProducts"
+          class="w-1/4 m-6"
+          v-for="product in category.products"
           :key="product.id"
         >
           <div
@@ -68,35 +62,38 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import axios from "axios";
 
-import { defineComponent } from "vue";
-
 export default defineComponent({
-  name: "HomeComponent",
+  name: "CategoryComponent",
   data() {
     return {
-      latestProducts: [],
+      category: {
+        products: [],
+      },
     };
   },
-  components: {},
-  
   mounted() {
-    this.getLatestProducts();
-    document.title = "Home | Djackets"
+    this.getCategory();
   },
 
   methods: {
-    async getLatestProducts() {
-      this.$store.commit('setIsLoading', true)
-      const response = await axios.get("/api/v1/latest-products/");
-      this.latestProducts = response.data;
-      this.$store.commit('setIsLoading', false)
+    async getCategory() {
+      const categorySlug = this.$route.params.category_slug;
+
+      this.$store.commit("setIsLoading", true);
+
+      const response = await axios.get(`/api/v1/products/${categorySlug}`);
+
+      this.category = response.data;
+      document.title = this.category.name + " | Djackets"
+
+      this.$store.commit("setIsLoading", false);
     },
   },
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style scoped>
 </style>
