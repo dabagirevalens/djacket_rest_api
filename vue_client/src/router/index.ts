@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
 
   {
     path: '/:category_slug',
-    name: 'category',
+    name: 'Category',
     component: Category
   }
 ]
