@@ -23,8 +23,8 @@
         <p>{{ product.description }}</p>
       </div>
       <p class="my-2">
-        <strong>Price:</strong>
-        <span class="text-blue-900">${{ product.price }}</span>
+        <strong>Price : </strong>
+        <span class="text-blue-900 font-bold"> ${{ product.price }}</span>
       </p>
 
       <div class="add-to-cart-controls flex justify-between">
@@ -59,6 +59,7 @@
               px-4
               rounded
             "
+            @click="addToCart"
           >
             Add to cart
           </button>
@@ -95,6 +96,19 @@ export default defineComponent({
       );
 
       this.product = response.data;
+    },
+
+    addToCart() {
+      if (isNaN(this.quantity) || this.quantity < 1) {
+        this.quantity = 1;
+      }
+
+      const item = {
+        product: this.product,
+        quantity: this.quantity,
+      };
+
+      this.$store.commit("addToCart", item);
     },
   },
 });
