@@ -5,10 +5,14 @@
     </div>
     <div class="nav-menu flex items-center justify-between mx-24">
       <div class="nav-links">
-        <router-link to="/summer" class="link">Summer</router-link>
-        <router-link to="/winter" class="link">Winter</router-link>
-        <router-link to="/cart" class="link"
-          >Cart
+        <router-link to="/summer" class="link hover:text-gray-200 items-center"
+          ><i class="bx bx-sun mr-2"></i>Summer</router-link
+        >
+        <router-link to="/winter" class="link hover:text-gray-200"
+          ><i class="bx bx-cloud-rain mr-2"></i>Winter</router-link
+        >
+        <router-link to="/cart" class="link hover:text-gray-200"
+          ><i class="bx bx-cart mr-2"></i>Cart
           <span class="font-bold text-sky-300 absolute -mt-2"
             >{{ cartTotalLength > 0 ? cartTotalLength : "" }}
           </span></router-link

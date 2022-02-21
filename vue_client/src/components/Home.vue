@@ -83,12 +83,15 @@ export default defineComponent({
   
   mounted() {
     this.getLatestProducts();
+    document.title = "Home | Djackets"
   },
 
   methods: {
     async getLatestProducts() {
+      this.$store.commit('setIsLoading', true)
       const response = await axios.get("/api/v1/latest-products/");
       this.latestProducts = response.data;
+      this.$store.commit('setIsLoading', false)
     },
   },
 });

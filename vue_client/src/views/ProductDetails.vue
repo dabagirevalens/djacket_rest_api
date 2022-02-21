@@ -88,6 +88,8 @@ export default defineComponent({
 
   methods: {
     async getProduct() {
+      this.$store.commit("setIsLoading", true);
+
       const category_slug = this.$route.params.category_slug;
       const product_slug = this.$route.params.product_slug;
 
@@ -96,6 +98,9 @@ export default defineComponent({
       );
 
       this.product = response.data;
+      document.title = this.product.name + " | Djackets";
+
+      this.$store.commit("setIsLoading", false);
     },
 
     addToCart() {
