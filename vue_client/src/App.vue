@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar />
+    <NavBar :cartTotalLength="cartTotalLength" />
     <router-view />
 
     <footer class="text-center font-bold">
@@ -16,6 +16,33 @@ export default {
   components: {
     NavBar,
   },
+  data() {
+    return {
+      cart: {
+        items: [],
+      },
+    };
+  },
+
+  beforeCreate() {
+    this.$store.commit("initializeStore");
+  },
+
+  mounted() {
+    this.cart = this.$store.state.cart
+  },
+
+  computed :{
+    cartTotalLength(){
+      let totalLength = 0
+
+      for(let i=0; i<this.cart.items.length; i++){
+        totalLength += this.cart.items[i].quantity
+      }
+
+      return totalLength
+    }
+  }
 };
 </script>
 
