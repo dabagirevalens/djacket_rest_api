@@ -33,8 +33,17 @@ export default defineComponent({
   components: {
     ProductBox,
   },
+
   mounted() {
     this.getCategory();
+  },
+
+  watch: {
+    $route(to, from) {
+      if (to.name === "Category") {
+        this.getCategory();
+      }
+    },
   },
 
   methods: {
