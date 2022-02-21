@@ -1,6 +1,14 @@
 <template>
   <div>
     <NavBar :cartTotalLength="cartTotalLength" />
+
+    <div
+      class="is-loading-message font-bold text-center"
+      :class="{ 'is-loading': $store.state.isLoading }"
+    >
+      <span>Loading ......</span>
+    </div>
+
     <router-view />
 
     <footer class="text-center font-bold">
@@ -29,20 +37,20 @@ export default {
   },
 
   mounted() {
-    this.cart = this.$store.state.cart
+    this.cart = this.$store.state.cart;
   },
 
-  computed :{
-    cartTotalLength(){
-      let totalLength = 0
+  computed: {
+    cartTotalLength() {
+      let totalLength = 0;
 
-      for(let i=0; i<this.cart.items.length; i++){
-        totalLength += this.cart.items[i].quantity
+      for (let i = 0; i < this.cart.items.length; i++) {
+        totalLength += this.cart.items[i].quantity;
       }
 
-      return totalLength
-    }
-  }
+      return totalLength;
+    },
+  },
 };
 </script>
 
@@ -53,5 +61,14 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.is-loading-message{
+  height: 0;
+  overflow: hidden;
+
+  &.is-loading{
+    height: 40px;
+  }
 }
 </style>
