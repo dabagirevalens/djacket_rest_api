@@ -39,7 +39,7 @@ export default defineComponent({
   },
 
   watch: {
-    $route(to, from) {
+    $route(to) {
       if (to.name === "Category") {
         this.getCategory();
       }
