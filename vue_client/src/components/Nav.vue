@@ -3,6 +3,26 @@
     <div class="nav-brand mx-24">
       <router-link to="/"><strong>Djackets</strong></router-link>
     </div>
+    <form class="flex items-center" action="/search">
+      <input
+        type="text"
+        class="
+          block
+          p-2
+          pl-6
+          w-80
+          text-gray-900
+          bg-white-500
+          rounded-tl rounded-bl
+          border-0
+        "
+        placeholder="What are you looking for?"
+        name="query"
+      />
+      <button class="bg-gray-500 p-2 rounded-tr rounded-br">
+        <i class="bx bx-search-alt"></i>
+      </button>
+    </form>
     <div class="nav-menu flex items-center justify-between mx-24">
       <div class="nav-links">
         <router-link to="/summer" class="link hover:text-gray-200 items-center"
