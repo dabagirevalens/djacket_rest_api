@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Category from '../components/Category.vue'
 import SearchComponent from '../components/Search.vue'
+import CartView from '../views/CartView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -32,7 +33,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:category_slug',
     name: 'Category',
     component: Category
+  },
+  
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: CartView
   }
+
 ]
 
 const router = createRouter({
