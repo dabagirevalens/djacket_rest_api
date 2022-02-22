@@ -39,8 +39,7 @@ export default {
     let params = new URLSearchParams(uri);
 
     if (params.get("query")) {
-      this.query = params.query;
-
+      this.query = params.get("query");
       this.performSearch();
     }
   },
@@ -48,8 +47,10 @@ export default {
   methods: {
     async performSearch() {
       this.$store.commit("setIsLoading", true);
-      const response = await axios.post(`/api/v1/products/search/`, {'query': this.query}); 
-      console.log(response)
+      const response = await axios.get(
+        `/api/v1/products?search_query=${this.query}`
+      );
+
       this.products = response.data;
       this.$store.commit("setIsLoading", false);
     },

@@ -1,12 +1,13 @@
-from django.db.models import Q
+from re import T
 from django.http import Http404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework import filters
 
 from .models import Category, Product
 from .serializers import ProductSerializer, CategorySerializer
+from .utils import searchProduct
 
 
 class LatestProductsList(APIView):
@@ -43,13 +44,8 @@ class CategoryDetails(APIView):
         return Response(serializer.data)
 
 
-@api_view(['POST'])
-def search(request):
-    query = request.data.get('query', '')
-
-    if query:
-        products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-        serializer = ProductSerializer(products)
+class ProductSearch(APIView):
+    def get(self, request, format=None):
+        products = searchProduct(request)
+        serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
-    else:
-        return Response({'products': []})
