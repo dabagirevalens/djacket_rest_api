@@ -19,12 +19,24 @@
             v-for="item in cart.items"
             :initialItem="item"
             :key="item.id"
+            v-on:removeFromCart="removeFromCart"
           />
         </tbody>
       </table>
       <p v-else class="text-center my-4 text-3xl">
         You have no products in your cart!!
       </p>
+    </div>
+    <div class="summary mt-12 p-12">
+      <h2 class="text-1xl font-bold my-2">Summary</h2>
+      <strong>${{ cartTotalPrice.toFixed(2) }}</strong
+      >, {{ cartTotalLength }} items
+      <hr class="my-4 mb-8" />
+      <router-link
+        class="bg-gray-900 p-4 rounded text-white mt-12"
+        to="/cart/checkout"
+        >proceed to check out</router-link
+      >
     </div>
   </div>
 </template>
@@ -40,7 +52,7 @@ export default defineComponent({
     CartItem,
   },
 
-  data :() => {
+  data: () => {
     return {
       cart: {
         items: [],
@@ -54,9 +66,32 @@ export default defineComponent({
 
   computed: {
     cartTotalLength() {
-      return this.cart.items.reduce((acc: number, curVal: { quantity: number; }) => {
-        return (acc += curVal.quantity);
-      }, 0);
+      return this.cart.items.reduce(
+        (acc: number, curVal: { quantity: number }) => {
+          return (acc += curVal.quantity);
+        },
+        0
+      );
+    },
+
+    cartTotalPrice() {
+      return this.cart.items.reduce(
+        (
+          acc: number,
+          curVal: { product: { price: number }; quantity: number }
+        ) => {
+          return (acc += curVal.product.price * curVal.quantity);
+        },
+        0
+      );
+    },
+  },
+
+  methods: {
+    removeFromCart(item: { product: { id: number } }) {
+      this.cart.items = this.cart.items.filter(
+        (i: { product: { id: number } }) => i.product.id !== item.product.id
+      );
     },
   },
 });
