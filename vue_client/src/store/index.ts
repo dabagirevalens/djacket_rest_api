@@ -8,7 +8,7 @@ export default createStore({
     },
     isAuthenticated: false,
     isLoading: false,
-    token: ''
+    token: <string | null> ''
   },
   getters: {
   },
@@ -19,6 +19,14 @@ export default createStore({
         state.cart = JSON.parse(localStorage.getItem('cart') || '{}')
       } else {
         localStorage.setItem('cart', JSON.stringify(state.cart))
+      }
+
+      if(localStorage.getItem('token')){
+        state.token = localStorage.getItem('token')
+        state.isAuthenticated = true
+      }else{
+        state.token = ''
+        state.isAuthenticated = false
       }
     },
 
@@ -36,7 +44,19 @@ export default createStore({
 
     setIsLoading(state, status){
       state.isLoading = status
+    },
+    
+    setToken(state, token){
+      state.token = token
+      state.isAuthenticated = true
+    },
+
+    removeToken(state){
+      state.token = ''
+      state.isAuthenticated = false
     }
+
+     
   },
   actions: {
   },
