@@ -51,7 +51,7 @@
             ml-6
           "
         >
-          login
+          <router-link to="/log-in"> login </router-link>
         </button>
       </div>
     </div>
