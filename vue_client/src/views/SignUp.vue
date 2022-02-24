@@ -31,28 +31,6 @@
         />
       </div>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-          Email
-        </label>
-        <input
-          class="
-            shadow
-            appearance-none
-            border
-            rounded
-            w-full
-            py-2
-            px-3
-            text-gray-700
-            leading-tight
-            focus:outline-none focus:shadow-outline
-          "
-          v-model="email"
-          type="text"
-          placeholder="Email"
-        />
-      </div>
-      <div class="mb-4">
         <label
           class="block text-gray-700 text-sm font-bold mb-2"
           for="password"
@@ -153,7 +131,6 @@ export default {
   data() {
     return {
       username: "",
-      email: "",
       password: "",
       confirmPassword: "",
       errors: [],
@@ -168,10 +145,6 @@ export default {
         this.errors.push("Please enter your user name!");
       }
 
-      if (this.email === "") {
-        this.errors.push("Please enter your email !");
-      }
-
       if (this.password === "") {
         this.errors.push("Please enter password !");
       }
@@ -183,23 +156,27 @@ export default {
       if (!this.errors.length) {
         const formData = {
           username: this.username,
-          email: this.email,
           password: this.password,
         };
 
-        axios.post(`/api/v1/users/`, formData).then(() => {
-          this.$route.push("/log-in");
-        }).catch(err =>{
-            if(err.response){
-                for (const property in err.response.data){
-                    this.errors.push (`${property} : ${err.response.data[property]}`)
-                }
-                console.log(JSON.stringify(err.response.data))
-            }else if(err.message){
-                this.errors.push('Something went wrong, please try again later')
-                console.log(JSON.stringify(err))  
+        axios
+          .post(`/api/v1/users/`, formData)
+          .then(() => {
+            this.$route.push("/log-in");
+          })
+          .catch((err) => {
+            if (err.response) {
+              for (const property in err.response.data) {
+                this.errors.push(
+                  `${property} : ${err.response.data[property]}`
+                );
+              }
+              console.log(JSON.stringify(err.response.data));
+            } else if (err.message) {
+              this.errors.push("Something went wrong, please try again later");
+              console.log(JSON.stringify(err));
             }
-        });
+          });
       }
     },
   },

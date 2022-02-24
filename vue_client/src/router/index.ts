@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import Category from '../components/Category.vue'
 import SearchComponent from '../components/Search.vue'
 import CartView from '../views/CartView.vue'
-import SignUp from '../views/SignUp.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -40,12 +39,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/cart',
     name: 'Cart',
     component: CartView
-  },
-
-  {
-    path : '/signup',
-    name : 'SignUp',
-    component : SignUp
   }
 
 ]
