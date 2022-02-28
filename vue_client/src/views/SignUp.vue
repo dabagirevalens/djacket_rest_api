@@ -131,8 +131,14 @@
         </button>
       </div>
     </form>
-        <hr />
-        <p>Or <router-link to="/log-in" class="text-sky-500 mx-4">click here </router-link> to login </p>
+    <hr />
+    <p>
+      Or
+      <router-link to="/log-in" class="text-sky-500 mx-4"
+        >click here
+      </router-link>
+      to login
+    </p>
   </div>
 </template>
 
@@ -177,19 +183,24 @@ export default {
           password: this.password,
         };
 
-        axios.post(`/api/v1/users/`, formData).then(() => {
-          this.$route.push("/log-in");
-        }).catch(err =>{
-            if(err.response){
-                for (const property in err.response.data){
-                    this.errors.push (`${property} : ${err.response.data[property]}`)
-                }
-                console.log(JSON.stringify(err.response.data))
-            }else if(err.message){
-                this.errors.push('Something went wrong, please try again later')
-                console.log(JSON.stringify(err))  
+        axios
+          .post(`/api/v1/users/`, formData)
+          .then(() => {
+            this.$router.push("/log-in");
+          })
+          .catch((err) => {
+            if (err.response) {
+              for (const property in err.response.data) {
+                this.errors.push(
+                  `${property} : ${err.response.data[property]}`
+                );
+              }
+              console.log(JSON.stringify(err.response.data));
+            } else if (err.message) {
+              this.errors.push("Something went wrong, please try again later");
+              console.log(JSON.stringify(err));
             }
-        });
+          });
       }
     },
   },

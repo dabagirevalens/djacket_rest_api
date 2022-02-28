@@ -98,7 +98,7 @@
       <hr class="my-2" />
       <p class="text">
         Or
-        <router-link to="/log-in" class="text-sky-500 mx-4"
+        <router-link to="/sign-up" class="text-sky-500 mx-4"
           >click here
         </router-link>
         to sign up
@@ -159,9 +159,10 @@ export default {
 
             const pathTo = this.$route.query.to || "/cart";
 
-            this.$route.push(pathTo);
+            this.$router.push(pathTo);
           })
           .catch((err) => {
+            console.log(err);
             if (err.response) {
               for (const property in err.response.data) {
                 this.errors.push(

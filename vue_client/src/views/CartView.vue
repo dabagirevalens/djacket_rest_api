@@ -59,6 +59,13 @@ export default defineComponent({
       },
     };
   },
+  watch: {
+    $route(to) {
+      if (to.name === "Cart") {
+        window.location.reload()
+      }
+    },
+  },
 
   mounted() {
     this.cart = this.$store.state.cart;
